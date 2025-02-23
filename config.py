@@ -1,19 +1,14 @@
 import os
 
 BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-import os
 
-BASE_DIR = os.path.abspath(os.path.dirname(__file__))
-
-# Cambia a PostgreSQL si la variable DATABASE_URL está configurada en Heroku
-SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///" + os.path.join(BASE_DIR, "instance", "mi_api.db")).replace("postgres://", "postgresql://")
+# Usa PostgreSQL si está en Heroku, de lo contrario usa SQLite localmente
+DATABASE_URL = os.getenv("DATABASE_URL")
+if DATABASE_URL:
+    SQLALCHEMY_DATABASE_URI = DATABASE_URL.replace("postgres://", "postgresql://")
+else:
+    SQLALCHEMY_DATABASE_URI = "sqlite:///" + os.path.join(BASE_DIR, "instance", "mi_api.db")
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-import os
-
-SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "").replace("postgres://", "postgresql://")
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-
  
+    
