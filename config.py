@@ -11,5 +11,9 @@ SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "sqlite:///" + os.path.join(
 SQLALCHEMY_TRACK_MODIFICATIONS = False
 
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+import os
+
+SQLALCHEMY_DATABASE_URI = os.getenv("DATABASE_URL", "").replace("postgres://", "postgresql://")
+SQLALCHEMY_TRACK_MODIFICATIONS = False
 
  
